@@ -1,6 +1,5 @@
 # Build-a-ML-Workflow-For-On-Amazon-SageMaker
 
-# Scones Unlimited: Image Classification Step Functions Project
 
 ## Project Overview
 
