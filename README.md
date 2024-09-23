@@ -1,4 +1,4 @@
-# Build a ML Workflow For On Amazon SageMaker
+# Build a ML Workflow On Amazon SageMaker
 
 
 ## Project Overview
