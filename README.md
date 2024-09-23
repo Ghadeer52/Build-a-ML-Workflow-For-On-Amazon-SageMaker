@@ -88,7 +88,7 @@ plt.show()
 ## Challenges and Stretch Goals
 
 ### Error Handling and Failures:
-Implementing effective error handling was essential for this project. In the final Lambda function, if the prediction confidence is below the defined threshold (e.g., 70%), an exception is raised, causing the Step Function to fail. This ensures low-confidence predictions are reviewed by the operations team, adhering to best practices for error handling in workflows.
+Implementing effective error handling was essential for this project. In the final Lambda function, if the prediction confidence is below the defined threshold (e.g., 95%), an exception is raised, causing the Step Function to fail. This ensures low-confidence predictions are reviewed by the operations team, adhering to best practices for error handling in workflows.
 
 ### Data Capture and Visualization:
 We used SageMaker's data capture feature to log inferences during execution. By storing and analyzing these logs, we visualized the model’s performance over time, adjusted the confidence threshold accordingly, and ensured that only reliable predictions were processed by the workflow.
