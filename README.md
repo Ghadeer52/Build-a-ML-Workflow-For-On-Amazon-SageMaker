@@ -7,7 +7,7 @@ This project leverages AWS Lambda, SageMaker, and Step Functions to build an ima
 
 1. **Image Data Serialization:** Reads an image from S3, base64 encodes it, and prepares it for classification.
 2. **Model Inference:** Uses a pre-trained image classification model deployed on SageMaker to predict whether the image is a bicycle or motorcycle.
-3. **Confidence Filter:** Filters out predictions that do not meet a predefined confidence threshold (e.g., 70%). If the confidence is below the threshold, the workflow raises an exception, allowing the operations team to review low-confidence predictions.
+3. **Confidence Filter:** Filters out predictions that do not meet a predefined confidence threshold (e.g., 90%). If the confidence is below the threshold, the workflow raises an exception, allowing the operations team to review low-confidence predictions.
 
 ## Architecture
 
@@ -18,6 +18,16 @@ The project uses AWS services and technologies to build a scalable, serverless i
 - **AWS Step Functions:** Orchestrates the entire workflow, chaining Lambda functions together in a logical order and handling retries and error handling.
 - **S3:** Stores the input images for classification and captures model inference data for monitoring.
 
+## Jupyter Notebook (`starter.ipynb`)
+
+In addition to the Lambda functions and Step Functions workflow, the project includes a Jupyter Notebook (`starter.ipynb`) that contains helper functions, test cases, and an implementation of the pipeline. The notebook helps in:
+
+- Testing the Lambda functions locally before deploying them to AWS.
+- Exploring SageMaker functionalities, such as deploying the model and capturing inferences.
+- Visualizing model performance and confidence over time using captured data.
+
+This notebook serves as a useful reference for exploring the SageMaker capabilities and testing your workflow before full deployment.
+
 ## Workflow Steps
 
 1. **Serialize Image Data:**
@@ -27,7 +37,7 @@ The project uses AWS services and technologies to build a scalable, serverless i
     - The base64 encoded image is passed to the SageMaker model endpoint to predict the class of the image (bicycle or motorcycle).
     
 3. **Confidence Filtering:**
-    - A threshold-based filtering Lambda function checks if any of the predictions exceed the predefined confidence threshold (e.g., 0.70). If the confidence is below the threshold, the workflow raises an exception.
+    - A threshold-based filtering Lambda function checks if any of the predictions exceed the predefined confidence threshold (e.g., 0.90). If the confidence is below the threshold, the workflow raises an exception.
 
 ## Key Features
 
@@ -88,7 +98,7 @@ plt.show()
 ## Challenges and Stretch Goals
 
 ### Error Handling and Failures:
-Implementing effective error handling was essential for this project. In the final Lambda function, if the prediction confidence is below the defined threshold (e.g., 95%), an exception is raised, causing the Step Function to fail. This ensures low-confidence predictions are reviewed by the operations team, adhering to best practices for error handling in workflows.
+Implementing effective error handling was essential for this project. In the final Lambda function, if the prediction confidence is below the defined threshold (e.g., 90%), an exception is raised, causing the Step Function to fail. This ensures low-confidence predictions are reviewed by the operations team, adhering to best practices for error handling in workflows.
 
 ### Data Capture and Visualization:
 We used SageMaker's data capture feature to log inferences during execution. By storing and analyzing these logs, we visualized the model’s performance over time, adjusted the confidence threshold accordingly, and ensured that only reliable predictions were processed by the workflow.
